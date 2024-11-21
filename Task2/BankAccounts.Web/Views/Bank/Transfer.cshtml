@@ -1,0 +1,45 @@
+﻿@model BankAccount.Core.Models.Account
+
+@{
+    var accounts = ViewBag.Accounts as IEnumerable<BankAccount.Core.Models.Account>;
+}
+
+<h1 class="mb-4">Перевод средств</h1>
+
+<form method="post" class="mb-4">
+    <div class="mb-3">
+        <label for="fromAccountId" class="form-label">Счет отправителя:</label>
+        <select class="form-select" id="fromAccountId" name="fromAccountId" required>
+            @foreach (var account in accounts)
+            {
+                <option value="@account.Id">@account.OwnerName | @account.Balance.ToString("C2") (@account.Id)  </option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="toAccountId" class="form-label">Счет получателя:</label>
+        <select class="form-select" id="toAccountId" name="toAccountId" required>
+            @foreach (var account in accounts)
+            {
+                <option value="@account.Id">@account.OwnerName (@account.Id)</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="amount" class="form-label">Сумма:</label>
+        <input type="number" class="form-control" id="amount" name="amount" step="0.01" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Перевести</button>
+</form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p class="mb-0">@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<a asp-action="Index" class="btn btn-link">Назад к списку счетов</a>

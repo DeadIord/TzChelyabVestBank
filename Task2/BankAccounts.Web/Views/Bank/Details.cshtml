@@ -1,0 +1,16 @@
+﻿@model BankAccount.Core.Models.Account
+
+<h1 class="mb-4">Детали счета</h1>
+
+<div class="mb-3">
+    <p><strong>ID:</strong> @Model.Id</p>
+    <p><strong>Владелец:</strong> @Model.OwnerName</p>
+    <p><strong>Баланс:</strong> @Model.Balance.ToString("C2")</p>
+</div>
+
+<div>
+    <a asp-action="Deposit" asp-route-id="@Model.Id" class="btn btn-success">Пополнить счет</a>
+    <a asp-action="Withdraw" asp-route-id="@Model.Id" class="btn btn-warning ms-2">Снять средства</a>
+    <a asp-action="Transactions" asp-route-id="@Model.Id" class="btn btn-secondary ms-2">История транзакций</a>
+    <a asp-action="Index" class="btn btn-link ms-2">Назад к списку счетов</a>
+</div>

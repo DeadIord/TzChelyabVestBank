@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BankAccount.Core.Models.Account>
+
+<h1 class="mb-4">Счета</h1>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>ID</th>
+            <th>Владелец</th>
+            <th>Баланс</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var account in Model)
+        {
+            <tr>
+                <td>@account.Id</td>
+                <td>@account.OwnerName</td>
+                <td>@account.Balance.ToString("C2")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@account.Id" class="btn btn-sm btn-info">Детали</a>
+                    <a asp-action="Transactions" asp-route-id="@account.Id" class="btn btn-sm btn-secondary ms-2">Транзакции</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="mt-3">
+    <a asp-action="Create" class="btn btn-success">Создать новый счет</a>
+    <a asp-action="Transfer" class="btn btn-primary ms-2">Перевести средства</a>
+</div>

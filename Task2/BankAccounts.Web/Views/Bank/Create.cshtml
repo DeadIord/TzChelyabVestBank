@@ -1,0 +1,13 @@
+﻿@model BankAccount.Core.Models.Account
+
+<h1 class="mb-4">Создать новый счет</h1>
+
+<form method="post" class="mb-4">
+    <div class="mb-3">
+        <label for="ownerName" class="form-label">Имя владельца:</label>
+        <input type="text" class="form-control" id="ownerName" name="ownerName" required />
+    </div>
+    <button type="submit" class="btn btn-success">Создать</button>
+</form>
+
+<a asp-action="Index" class="btn btn-link">Назад к списку счетов</a>
